@@ -1,7 +1,7 @@
 cmake_minimum_required (VERSION 2.6)
 project (anago)
 add_definitions (-DANAGO=1 -DDEBUG=1)
-add_compile_options(-Wall -Werror)
+add_compile_options(-Wall -Werror -fcommon)
 
 set(VERSION_MAJOR 0)
 set(VERSION_MINOR 6)

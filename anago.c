@@ -171,8 +171,26 @@ static void dump(int c, char **v)
 	config.target = v[3];
 	config.reader = &DRIVER_KAZZO;
 	config.mappernum = -1;
-	if(c == 5){
+	config.submappernum = -1;
+	if(c >= 5){
 		config.mappernum = atoi(v[4]);
+		if(isAValidMapperNumber(config.mappernum)){
+			fprintf(stdout, "Using command-line mappernum value : %ld\n", config.mappernum);
+		}
+		else{
+			fprintf(stdout, "Using script mappernum value\n");
+			config.mappernum = -1;
+		}
+	}
+	if(c == 6){
+		config.submappernum = atoi(v[5]);
+		if(isAValidSubmapperNumber(config.submappernum)){
+			fprintf(stdout, "Using command-line submappernum value : %ld\n", config.submappernum);
+		}
+		else{
+			fprintf(stdout, "Using script submappernum value\n");
+			config.submappernum = -1;
+		}
 	}
 	if(config.reader->open_or_close(READER_OPEN) == NG){
 		puts("reader open error");
@@ -184,7 +202,7 @@ static void dump(int c, char **v)
 }
 static void usage(const char *v)
 {
-	puts("famicom bus simluator 'anago'");
+	puts("famicom bus simulator 'anago'");
 	printf("%s [mode] [script] [target] ....\n", v);
 }
 int main(int c, char **v)
@@ -200,7 +218,7 @@ int main(int c, char **v)
 			break;
 		default:
 			usage(v[0]);
-			puts("mode are a, d, D, f, g");
+			puts("mode are a, d, D, f, F");
 			break;
 		}
 	}else{

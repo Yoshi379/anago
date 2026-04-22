@@ -1,3 +1,5 @@
+# Anago command-line software for Kazzo dumper (Linux portage)
+
 This project is a Linux port of the **anago** 
 NES/Famicom flashing and dumping utility 
 (from the [Unagi](https://osdn.net/projects/unagi/wiki/FrontPage) project) which is used with the [kazzo](https://osdn.net/projects/unagi/releases/46303) board. This specifically ports version 0.6.0 which was generally more reliable and had a larger script complement than version 0.6.2. That said, I'm sure some investigation could convert missing scripts, and potentially the 0.6.2 version may be more compatible to begin with, but what can you do. I doubt anyone besides myself will use this anyways.
@@ -20,7 +22,8 @@ I did start changes by commiting the unmodified upstream code, so you can also b
 This project only requires the following:
 
  * [Squirrel](http://squirrel-lang.org/)
- * [libusb](https://libusb.info/)
+ * [Ncurses](https://invisible-island.net/ncurses/)
+ * [libusb](http://www.linux-usb.org/)
  * [cmake](https://cmake.org/)
 
 And to regenerate the manual page:
@@ -29,36 +32,36 @@ And to regenerate the manual page:
 
 On a Debian/Ubuntu-based distro, these can be installed using the following command:
   
-    # apt install libsquirrel-dev libusb-dev cmake
+    apt install libsquirrel-dev libncurses-dev libusb-dev cmake
 
 ## Build
 
 The build sequence is actually quite simple. For a basic build, start with a terminal in the anago source folder and execute the following:
 
-    $ mkdir build
-    $ cd build
-    $ cmake ..
-    $ make
+    mkdir build
+    cd build
+    cmake ..
+    make
 
 To regenerate the manual page, if you have **txt2man** installed, use the following:
 
-    $ make manual
+    make manual
     
 ## Install
 
 After the above is run, simply execute the following, as root, in the build folder. This will install to **/usr/local** by default. Refer to cmake documentation for setting the prefix directory, if alternate destinations are needed.
 
-    # make install
+    make install
 
 ## Packaging
 
 The packaging process is slightly different than the above, as the prefix directory needs to be explicitly redirected so the tool is aware of the package destination. Execute the following from the **build** directory to create packages:
 
-    $ cmake -D CMAKE_INSTALL_PREFIX=/usr ..
-    $ make package
+    cmake -D CMAKE_INSTALL_PREFIX=/usr ..
+    make package
 
 For packaging formats other than .deb, edit the **CMakeLists** and add the package format to the **CPACK_GENERATOR** line.
     
 # Usage
 
-Refer to include manual page or original readme files for details.
+Refer to include manual page or original readme files for details :  [anago_en.txt](anago_en.txt) / [anago_ja.txt](anago_ja.txt).

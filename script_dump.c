@@ -188,12 +188,13 @@ static SQInteger nesfile_save(HSQUIRRELVM v)
 	}
 	struct romimage image;
 	long mirrorfind;
-	r = qr_argument_get(v, 2, &image.mappernum, &mirrorfind);
+	r = qr_argument_get(v, 3, &image.mappernum, &image.submappernum, &mirrorfind);
 	if(SQ_FAILED(r)){
 		return r;
 	}
 	image.cpu_rom = d->cpu.memory;
 	image.cpu_ram.data = NULL;
+	image.cpu_ram.size = 0;
 	image.ppu_rom = d->ppu.memory;
 	image.mirror = MIRROR_PROGRAMABLE;
 	if(mirrorfind == 1){
@@ -295,7 +296,7 @@ static bool script_execute(HSQUIRRELVM v, struct config_dump *c, struct dump_dri
 	}else{
 		SQRESULT r = qr_call(
 			v, "dump", (SQUserPointer) d, true, 
-			3, c->mappernum, c->increase.cpu, c->increase.ppu
+			4, c->mappernum, c->submappernum, c->increase.cpu, c->increase.ppu
 		);
 		if(SQ_FAILED(r)){
 			ret = false;

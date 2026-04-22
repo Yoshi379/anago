@@ -48,7 +48,7 @@ struct romimage{
 #if ANAGO==0
 	struct flash_order cpu_flash, ppu_flash;
 #endif
-	long mappernum;
+	long mappernum, submappernum;
 	enum vram_mirroring mirror;
 	int backupram;
 };
@@ -56,6 +56,11 @@ struct romimage{
 enum{
 	MEMORY_AREA_CPU_RAM, MEMORY_AREA_CPU_ROM, MEMORY_AREA_PPU
 };
+
+/* Macros functions for NES 2.0 headers support */
+#define isAValidMapperNumber(mappernum) ((mappernum >= 0) && (mappernum <= 0xFFF))
+#define isAValidSubmapperNumber(submappernum) ((submappernum >= 0) && (submappernum <= 0xF))
+
 #ifdef HEADEROUT
 void nesheader_set(const struct romimage *r, uint8_t *header);
 #endif
