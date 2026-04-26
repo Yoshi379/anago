@@ -23,7 +23,7 @@ This project only requires the following:
 
  * [Squirrel](http://squirrel-lang.org/)
  * [Ncurses](https://invisible-island.net/ncurses/)
- * [libusb](http://www.linux-usb.org/)
+ * [libusb](https://libusb.info/)
  * [cmake](https://cmake.org/)
 
 And to regenerate the manual page:
@@ -32,6 +32,7 @@ And to regenerate the manual page:
 
 On a Debian/Ubuntu-based distro, these can be installed using the following command:
   
+    su
     apt install libsquirrel-dev libncurses-dev libusb-dev cmake
 
 ## Build
@@ -51,6 +52,7 @@ To regenerate the manual page, if you have **txt2man** installed, use the follow
 
 After the above is run, simply execute the following, as root, in the build folder. This will install to **/usr/local** by default. Refer to cmake documentation for setting the prefix directory, if alternate destinations are needed.
 
+	su
     make install
 
 ## Packaging
